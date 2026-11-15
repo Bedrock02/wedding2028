@@ -1,6 +1,9 @@
 {
   "name": "wedding2028",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "predev": "npm run sanity:typegen",
     "dev": "next dev",
