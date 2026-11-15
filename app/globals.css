@@ -8,34 +8,37 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Waterfront classic: navy, ivory and soft gold with a small radius.
- * Switching looks means changing the values in :root and the two fonts in
- * app/layout.tsx; nothing else.
+ * Teal & sand: pearl page, deep teal text, teal buttons, sand and champagne
+ * lines, an aqua footer. Switching looks means changing the values in :root
+ * and the two fonts in app/layout.tsx; nothing else.
  */
 :root {
   --radius: 0.25rem;
 
-  --background: #faf7f0; /* ivory */
-  --foreground: #14233f; /* navy */
-  --card: #fffdf8;
-  --card-foreground: #14233f;
-  --popover: #fffdf8;
-  --popover-foreground: #14233f;
-  --primary: #14233f;
-  --primary-foreground: #faf7f0;
-  --secondary: #f1ebdd;
-  --secondary-foreground: #14233f;
-  --muted: #f1ebdd;
-  --muted-foreground: #47536b;
-  --accent: #eadfc3; /* soft gold wash, for hover and active states */
-  --accent-foreground: #14233f;
+  --background: #fbf8f2; /* pearl */
+  --foreground: #12404b; /* deep teal */
+  --card: #fffdf9;
+  --card-foreground: #12404b;
+  --popover: #fffdf9;
+  --popover-foreground: #12404b;
+  --primary: #1f6b78; /* teal */
+  --primary-foreground: #ffffff;
+  --secondary: #efe4cf; /* sand tint */
+  --secondary-foreground: #12404b;
+  --muted: #efe4cf;
+  --muted-foreground: #4d666b;
+  --accent: #dcedeb; /* aqua wash, for hover and active states */
+  --accent-foreground: #12404b;
   --destructive: #a3312a;
-  --border: #d9c9a3; /* thin gold border */
-  --input: #d9c9a3;
-  --ring: #b8975a;
+  --border: #e0cfa9; /* sand line */
+  --input: #e0cfa9;
+  --ring: #1f6b78;
 
-  --gold: #b8975a; /* decorative lines and ornaments only */
-  --gold-deep: #7d5f26; /* gold that is readable as text on ivory */
+  --footer: #cde7e5; /* aqua */
+  --footer-foreground: #12404b;
+
+  --gold: #c8a46a; /* decorative lines and ornaments only */
+  --gold-deep: #7a5a2a; /* sand-gold that is readable as text on pearl */
 }
 
 @theme inline {
@@ -68,6 +71,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
 }

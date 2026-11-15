@@ -23,6 +23,8 @@ export function Timeline({items}: {items: TimelineItem[]}) {
                 src={item.photo.src}
                 alt={item.photo.alt}
                 fill
+                // The first photo is near the top of the page, so load it right away.
+                priority={index === 0}
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover"
               />

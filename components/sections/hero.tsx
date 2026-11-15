@@ -30,14 +30,14 @@ export function Hero({eyebrow, coupleNames, date, city, image, buttons}: HeroPro
       {/* Scrim so the white text stays readable on any photo. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-[#0d1830]/90 via-[#0d1830]/45 to-[#0d1830]/10"
+        className="absolute inset-0 bg-linear-to-t from-[#12404b]/90 via-[#12404b]/50 to-[#12404b]/10"
       />
       <div className="absolute inset-x-0 bottom-0 container pb-10 text-center text-white md:pb-16">
-        <p className="eyebrow text-[#f3e3b8]">{eyebrow}</p>
+        <p className="eyebrow text-[#f6e6c0]">{eyebrow}</p>
         <h1 className="mt-3 text-6xl leading-none sm:text-7xl md:text-8xl">{coupleNames}</h1>
         <p className="mt-4 text-lg md:text-xl">
           <span className="block sm:inline">{date}</span>
-          <span aria-hidden="true" className="mx-2 hidden text-[#f3e3b8] sm:inline">
+          <span aria-hidden="true" className="mx-2 hidden text-[#f6e6c0] sm:inline">
             ·
           </span>
           <span className="block sm:inline">{city}</span>

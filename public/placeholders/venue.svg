@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2b4470"/>
-      <stop offset="1" stop-color="#e6c39a"/>
+      <stop offset="0" stop-color="#3a8794"/>
+      <stop offset="1" stop-color="#f0dfba"/>
     </linearGradient>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f4a78"/>
-      <stop offset="1" stop-color="#0d1830"/>
+      <stop offset="0" stop-color="#68bbbb"/>
+      <stop offset="1" stop-color="#24707c"/>
     </linearGradient>
   </defs>
   <rect width="1600" height="900" fill="url(#sky)"/>
-  <circle cx="800" cy="504" r="100" fill="#f3e3b8" opacity="0.9"/>
+  <circle cx="800" cy="504" r="100" fill="#fff3d8" opacity="0.92"/>
   <rect y="540" width="1600" height="360" fill="url(#water)"/>
-  <g stroke="#e8d3a0" stroke-linecap="round" opacity="0.5" stroke-width="4">
+  <g stroke="#fff3d8" stroke-linecap="round" opacity="0.6" stroke-width="4">
     <line x1="672" y1="594" x2="928" y2="594"/>
     <line x1="608" y1="648" x2="992" y2="648"/>
     <line x1="704" y1="711" x2="896" y2="711"/>
     <line x1="640" y1="783" x2="960" y2="783"/>
   </g>
-  <text x="800" y="864" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#f3e3b8" opacity="0.7">Photo placeholder</text>
+  <text x="800" y="864" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#fff3d8" opacity="0.8">Photo placeholder</text>
 </svg>
