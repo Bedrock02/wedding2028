@@ -4,15 +4,15 @@ import type {Metadata} from 'next'
 import {Cormorant_Garamond, Inter} from 'next/font/google'
 
 const heading = Cormorant_Garamond({
-  variable: '--font-heading',
-  weight: ['400', '500', '600'],
+  variable: '--font-cormorant',
+  weight: ['500', '600'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
 })
 
 const body = Inter({
-  variable: '--font-body',
+  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 })

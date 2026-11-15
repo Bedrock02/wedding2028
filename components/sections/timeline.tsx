@@ -1,0 +1,46 @@
+import Image from 'next/image'
+
+import {AspectRatio} from '@/components/ui/aspect-ratio'
+
+export type TimelineItem = {
+  id: string
+  title: string
+  date: string
+  place: string
+  body: string
+  photo: {src: string; alt: string}
+}
+
+/** Story milestones in order, each with a photo. Photos alternate sides on wide screens. */
+export function Timeline({items}: {items: TimelineItem[]}) {
+  return (
+    <ol className="space-y-14 md:space-y-20">
+      {items.map((item, index) => (
+        <li key={item.id} className="grid items-center gap-6 md:grid-cols-2 md:gap-12">
+          <div className={index % 2 === 1 ? 'md:order-2' : undefined}>
+            <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-lg border bg-muted">
+              <Image
+                src={item.photo.src}
+                alt={item.photo.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </AspectRatio>
+          </div>
+          <div className="max-w-[65ch]">
+            <p className="eyebrow">
+              {item.date}
+              <span aria-hidden="true" className="mx-2">
+                ·
+              </span>
+              {item.place}
+            </p>
+            <h2 className="mt-2 text-4xl md:text-5xl">{item.title}</h2>
+            <p className="mt-4 text-muted-foreground">{item.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}

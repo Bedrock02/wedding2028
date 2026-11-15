@@ -40,3 +40,6 @@ yarn-error.log*
 next-env.d.ts
 
 # sanity typegen output is regenerated on dev/build
+
+# browser check output
+.playwright-mcp/
