@@ -1,13 +1,15 @@
 import Image from 'next/image'
 
 import {AspectRatio} from '@/components/ui/aspect-ratio'
+import type {ContentText} from '@/content/types'
+import {RichText} from '@/components/sections/rich-text'
 
 export type TimelineItem = {
   id: string
   title: string
   date: string
   place: string
-  body: string
+  body: ContentText
   photo: {src: string; alt: string}
 }
 
@@ -39,7 +41,7 @@ export function Timeline({items}: {items: TimelineItem[]}) {
               {item.place}
             </p>
             <h2 className="mt-2 text-4xl md:text-5xl">{item.title}</h2>
-            <p className="mt-4 text-muted-foreground">{item.body}</p>
+            <RichText value={item.body} className="prose prose-lg mt-4 text-muted-foreground" />
           </div>
         </li>
       ))}

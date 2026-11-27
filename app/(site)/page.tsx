@@ -1,11 +1,14 @@
 import {Countdown} from '@/components/sections/countdown'
 import {Hero} from '@/components/sections/hero'
 import {Ornament} from '@/components/sections/ornament'
-import {homePage, siteSettings} from '@/content/placeholder'
+import {RichText} from '@/components/sections/rich-text'
+import {getHomePage, getSiteSettings} from '@/sanity/lib/fetch'
 import {formatLongDate} from '@/lib/dates'
-import {pick} from '@/lib/i18n'
+import {pick, pickContent} from '@/lib/i18n'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [homePage, siteSettings] = await Promise.all([getHomePage(), getSiteSettings()])
+
   return (
     <>
       <Hero
@@ -22,11 +25,16 @@ export default function HomePage() {
       />
 
       <section className="container pt-14 text-center md:pt-20">
-        <p className="eyebrow">Counting down</p>
-        <h2 className="mt-2 text-4xl md:text-5xl">Until we say “I do”</h2>
+        <p className="eyebrow">{pick(homePage.countdownLabel ?? {en: 'Counting down'})}</p>
+        <h2 className="mt-2 text-4xl md:text-5xl">
+          {pick(homePage.countdownHeading ?? {en: 'Until we say “I do”'})}
+        </h2>
         <Ornament className="mt-6 mb-8" />
-        <Countdown target={siteSettings.weddingDateTime} doneMessage="We’re married!" />
-        <p className="mx-auto mt-10 max-w-[65ch] text-muted-foreground">{pick(homePage.intro)}</p>
+        <Countdown target={siteSettings.weddingDateTime} doneMessage={pick(homePage.countdownDoneMessage ?? {en: 'We’re married!'})} />
+        <RichText
+          value={pickContent(homePage.intro)}
+          className="prose prose-lg mx-auto mt-10 max-w-[65ch] text-muted-foreground"
+        />
       </section>
     </>
   )
