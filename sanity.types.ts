@@ -15,6 +15,161 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity.schema.json
+export type SiteLink = {
+  _type: "siteLink";
+  label: LocaleString;
+  href: "/" | "/our-story" | "/event-details";
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type ImageWithAlt = {
+  _type: "imageWithAlt";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: LocaleString;
+};
+
+export type LocaleBlockContent = {
+  _type: "localeBlockContent";
+  en: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  es?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type LocaleText = {
+  _type: "localeText";
+  en: string;
+  es?: string;
+};
+
+export type LocaleString = {
+  _type: "localeString";
+  en: string;
+  es?: string;
+};
+
+export type VenueReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "venue";
+};
+
+export type Event = {
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: LocaleString;
+  start?: string;
+  end?: string;
+  venue?: VenueReference;
+  dressCode?: LocaleString;
+  description?: LocaleText;
+  audience: "everyone" | "weddingParty";
+  order: number;
+};
+
+export type StoryMilestone = {
+  _id: string;
+  _type: "storyMilestone";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: LocaleString;
+  date: LocaleString;
+  place: LocaleString;
+  body: LocaleBlockContent;
+  photo: ImageWithAlt;
+  order: number;
+};
+
+export type EventDetailsPage = {
+  _id: string;
+  _type: "eventDetailsPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: LocaleString;
+};
+
+export type StoryPage = {
+  _id: string;
+  _type: "storyPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow: LocaleString;
+  title: LocaleString;
+  notesHeading?: LocaleString;
+  notes?: Array<{
+    from: string;
+    body: LocaleBlockContent;
+    _key: string;
+  }>;
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  headline: LocaleString;
+  intro: LocaleBlockContent;
+  heroImage: ImageWithAlt;
+  ctaButtons?: Array<
+    {
+      _key: string;
+    } & SiteLink
+  >;
+  countdownLabel?: LocaleString;
+  countdownHeading?: LocaleString;
+  countdownDoneMessage?: LocaleString;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -22,6 +177,58 @@ export type SiteSettings = {
   _updatedAt: string;
   _rev: string;
   coupleNames: string;
+  weddingDateTime: string;
+  city: LocaleString;
+  venue?: VenueReference;
+  hashtag?: string;
+  navItems?: Array<
+    {
+      _key: string;
+    } & SiteLink
+  >;
+  seo?: {
+    title: string;
+    description: string;
+  };
+  allowSearchIndexing?: boolean;
+};
+
+export type Venue = {
+  _id: string;
+  _type: "venue";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  address: LocaleText;
+  location?: Geopoint;
+  mapsUrl: string;
+  parkingNotes?: LocaleText;
+  accessibilityNotes?: LocaleText;
+  photo: ImageWithAlt;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -60,22 +267,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
 };
 
 export type SanityFileAsset = {
@@ -130,13 +321,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type Slug = {
   _type: "slug";
   current: string;
@@ -144,15 +328,235 @@ export type Slug = {
 };
 
 export type AllSanitySchemaTypes =
+  | SiteLink
+  | SanityImageAssetReference
+  | ImageWithAlt
+  | LocaleBlockContent
+  | LocaleText
+  | LocaleString
+  | VenueReference
+  | Event
+  | StoryMilestone
+  | EventDetailsPage
+  | StoryPage
+  | HomePage
   | SiteSettings
+  | Venue
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Geopoint
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
   | Slug;
+
+// Source: sanity/lib/queries.ts
+// Variable: siteSettingsQuery
+// Query: *[_id == "siteSettings"][0]{  coupleNames, weddingDateTime, city, hashtag, navItems,  "venue": venue->{name, address, mapsUrl, parkingNotes, accessibilityNotes, photo {  alt,  "src": asset->url,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "focus": hotspot {x, y}}},  seo, allowSearchIndexing}
+export type SiteSettingsQueryResult =
+  | {
+      coupleNames: null;
+      weddingDateTime: null;
+      city: null;
+      hashtag: null;
+      navItems: null;
+      venue: null;
+      seo: null;
+      allowSearchIndexing: null;
+    }
+  | {
+      coupleNames: null;
+      weddingDateTime: null;
+      city: null;
+      hashtag: null;
+      navItems: null;
+      venue: {
+        name: string;
+        address: LocaleText;
+        mapsUrl: string;
+        parkingNotes: LocaleText | null;
+        accessibilityNotes: LocaleText | null;
+        photo: {
+          alt: LocaleString;
+          src: string | null;
+          width: number | null;
+          height: number | null;
+          focus: {
+            x: number;
+            y: number;
+          } | null;
+        };
+      } | null;
+      seo: null;
+      allowSearchIndexing: null;
+    }
+  | {
+      coupleNames: string;
+      weddingDateTime: string;
+      city: LocaleString;
+      hashtag: string | null;
+      navItems: Array<
+        {
+          _key: string;
+        } & SiteLink
+      > | null;
+      venue: {
+        name: string;
+        address: LocaleText;
+        mapsUrl: string;
+        parkingNotes: LocaleText | null;
+        accessibilityNotes: LocaleText | null;
+        photo: {
+          alt: LocaleString;
+          src: string | null;
+          width: number | null;
+          height: number | null;
+          focus: {
+            x: number;
+            y: number;
+          } | null;
+        };
+      } | null;
+      seo: {
+        title: string;
+        description: string;
+      } | null;
+      allowSearchIndexing: boolean | null;
+    }
+  | null;
+
+// Source: sanity/lib/queries.ts
+// Variable: homePageQuery
+// Query: *[_id == "homePage"][0]{  headline, intro, countdownLabel, countdownHeading, countdownDoneMessage,  ctaButtons,  "heroImage": heroImage {  alt,  "src": asset->url,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "focus": hotspot {x, y}}}
+export type HomePageQueryResult =
+  | {
+      headline: null;
+      intro: null;
+      countdownLabel: null;
+      countdownHeading: null;
+      countdownDoneMessage: null;
+      ctaButtons: null;
+      heroImage: null;
+    }
+  | {
+      headline: LocaleString;
+      intro: LocaleBlockContent;
+      countdownLabel: LocaleString | null;
+      countdownHeading: LocaleString | null;
+      countdownDoneMessage: LocaleString | null;
+      ctaButtons: Array<
+        {
+          _key: string;
+        } & SiteLink
+      > | null;
+      heroImage: {
+        alt: LocaleString;
+        src: string | null;
+        width: number | null;
+        height: number | null;
+        focus: {
+          x: number;
+          y: number;
+        } | null;
+      };
+    }
+  | null;
+
+// Source: sanity/lib/queries.ts
+// Variable: storyPageQuery
+// Query: *[_id == "storyPage"][0]{  eyebrow, title, notesHeading,  notes[]{_key, from, body}}
+export type StoryPageQueryResult =
+  | {
+      eyebrow: LocaleString;
+      title: LocaleString;
+      notesHeading: LocaleString | null;
+      notes: Array<{
+        _key: string;
+        from: string;
+        body: LocaleBlockContent;
+      }> | null;
+    }
+  | {
+      eyebrow: null;
+      title: LocaleString;
+      notesHeading: null;
+      notes: null;
+    }
+  | {
+      eyebrow: null;
+      title: null;
+      notesHeading: null;
+      notes: null;
+    }
+  | {
+      eyebrow: null;
+      title: string | null;
+      notesHeading: null;
+      notes: null;
+    }
+  | null;
+
+// Source: sanity/lib/queries.ts
+// Variable: storyMilestonesQuery
+// Query: *[_type == "storyMilestone"]|order(order asc){  "id": _id, title, date, place, body,  "photo": photo {  alt,  "src": asset->url,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "focus": hotspot {x, y}}}
+export type StoryMilestonesQueryResult = Array<{
+  id: string;
+  title: LocaleString;
+  date: LocaleString;
+  place: LocaleString;
+  body: LocaleBlockContent;
+  photo: {
+    alt: LocaleString;
+    src: string | null;
+    width: number | null;
+    height: number | null;
+    focus: {
+      x: number;
+      y: number;
+    } | null;
+  };
+}>;
+
+// Source: sanity/lib/queries.ts
+// Variable: eventDetailsPageQuery
+// Query: *[_id == "eventDetailsPage"][0]{title}
+export type EventDetailsPageQueryResult =
+  | {
+      title: LocaleString;
+    }
+  | {
+      title: null;
+    }
+  | {
+      title: string | null;
+    }
+  | null;
+
+// Source: sanity/lib/queries.ts
+// Variable: eventsQuery
+// Query: *[_type == "event" && audience == "everyone"]|order(order asc){  "id": _id, name, start, end, dressCode, description}
+export type EventsQueryResult = Array<{
+  id: string;
+  name: LocaleString;
+  start: string | null;
+  end: string | null;
+  dressCode: LocaleString | null;
+  description: LocaleText | null;
+}>;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    '*[_id == "siteSettings"][0]{\n  coupleNames, weddingDateTime, city, hashtag, navItems,\n  "venue": venue->{name, address, mapsUrl, parkingNotes, accessibilityNotes, photo {\n  alt,\n  "src": asset->url,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "focus": hotspot {x, y}\n}},\n  seo, allowSearchIndexing\n}': SiteSettingsQueryResult;
+    '*[_id == "homePage"][0]{\n  headline, intro, countdownLabel, countdownHeading, countdownDoneMessage,\n  ctaButtons,\n  "heroImage": heroImage {\n  alt,\n  "src": asset->url,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "focus": hotspot {x, y}\n}\n}': HomePageQueryResult;
+    '*[_id == "storyPage"][0]{\n  eyebrow, title, notesHeading,\n  notes[]{_key, from, body}\n}': StoryPageQueryResult;
+    '*[_type == "storyMilestone"]|order(order asc){\n  "id": _id, title, date, place, body,\n  "photo": photo {\n  alt,\n  "src": asset->url,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height,\n  "focus": hotspot {x, y}\n}\n}': StoryMilestonesQueryResult;
+    '*[_id == "eventDetailsPage"][0]{title}': EventDetailsPageQueryResult;
+    '*[_type == "event" && audience == "everyone"]|order(order asc){\n  "id": _id, name, start, end, dressCode, description\n}': EventsQueryResult;
+  }
+}

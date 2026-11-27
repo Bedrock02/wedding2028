@@ -8,6 +8,8 @@ export type Locale = 'en' | 'es'
 
 /** Guest-facing text. Spanish is optional until the Spanish version ships. */
 export type LocalizedText = {en: string; es?: string}
+export type ContentText = string | object[]
+export type LocalizedContent = {en: ContentText; es?: ContentText}
 
 export type ImageContent = {
   src: string
@@ -30,7 +32,7 @@ export type SiteSettingsContent = {
 
 export type HomePageContent = {
   headline: LocalizedText
-  intro: LocalizedText
+  intro: LocalizedContent
   heroImage: ImageContent
   ctaButtons: LinkContent[]
 }
@@ -41,14 +43,14 @@ export type StoryMilestoneContent = {
   /** Free text such as "Spring 2019", so exact days are optional. */
   date: LocalizedText
   place: LocalizedText
-  body: LocalizedText
+  body: LocalizedContent
   photo: ImageContent
 }
 
 export type StoryNoteContent = {
   id: string
   from: string
-  body: LocalizedText
+  body: LocalizedContent
 }
 
 export type VenueContent = {

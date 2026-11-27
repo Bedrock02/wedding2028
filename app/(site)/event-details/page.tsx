@@ -3,18 +3,23 @@ import type {Metadata} from 'next'
 import {EventCard} from '@/components/sections/event-card'
 import {PageHeader} from '@/components/sections/page-header'
 import {VenueCard} from '@/components/sections/venue-card'
-import {events, siteSettings, venue} from '@/content/placeholder'
+import {getEventDetails, getSiteSettings} from '@/sanity/lib/fetch'
 import {formatLongDate, formatTime} from '@/lib/dates'
 import {pick} from '@/lib/i18n'
 
-export const metadata: Metadata = {title: 'Event Details'}
+export async function generateMetadata(): Promise<Metadata> {
+  const details = await getEventDetails()
+  return {title: pick(details.title)}
+}
 
-export default function EventDetailsPage() {
+export default async function EventDetailsPage() {
+  const [details, siteSettings] = await Promise.all([getEventDetails(), getSiteSettings()])
+  const {events, venue} = details
   const weddingDate = formatLongDate(siteSettings.weddingDateTime)
 
   return (
     <>
-      <PageHeader eyebrow={weddingDate} title="Event Details" />
+      <PageHeader eyebrow={weddingDate} title={pick(details.title)} />
 
       <section className="container grid gap-6 md:grid-cols-2">
         {events.map((event) => (
@@ -43,7 +48,7 @@ export default function EventDetailsPage() {
           details={[
             {label: 'Parking', text: pick(venue.parkingNotes)},
             {label: 'Accessibility', text: pick(venue.accessibilityNotes)},
-          ]}
+          ].filter((detail) => detail.text.trim().length > 0)}
         />
       </section>
     </>
